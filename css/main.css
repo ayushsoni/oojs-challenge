@@ -1,4 +1,7 @@
-
 #shapes-canvas {
     border: 1px solid #000000;
+}
+
+#shape-type, #shapes-canvas {
+	cursor: pointer;
 }
