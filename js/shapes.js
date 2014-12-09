@@ -40,7 +40,7 @@ function Circle(left, top, width, height, stylesMap) {
         //my variables for the circle
         var x = this.left + (width / 2);
         var y = this.top + (height / 2);
-        var radius = this.width  / 2;
+        var radius = this.width / 2;
         //draws the circle's properties
         canvasCtx.arc(x, y, radius, 0, 2*Math.PI);
         //fill in the circle
@@ -51,52 +51,49 @@ function Circle(left, top, width, height, stylesMap) {
 //implementing circle's prototypal class
 Circle.prototype = new Shape();
 
-//new shape with stylesMap parameter included in constructor
-function Prism(left, top, width, height, stylesMap) {
-    //create purple Prism
+function Triangle(left, top, width, height, stylesMap) {
+
     Shape.call(this, left, top, 50, 50, {
-        fillStyle: "purple",
-        //stroke on stylesMap
+        fillStyle: "green",
         stroke: stylesMap.stroke
     });
-    //add's random property
-    this.rand = Math.floor(Math.random() * (5));
-    //adjusts Prism()'s functionality
+
     this.renderShape = function(canvasCtx) {
-        if(this.rand == 0) {
-            if(Math.floor(Math.random() * (5)))
-                //make cool effect of blinking text on canvas
-                canvasCtx.fillText("Keep clicking here to make it rain Prisms and Cubes!", left, top);
-        } else {
-            //draw a cube/prism
-            canvasCtx.fillRect(this.left, this.top, 20, 20);
-            canvasCtx.fillRect(this.left + 5, this.top + 5, 20, 20);
-
-            //position and begin path of moving cube
-            canvasCtx.beginPath();
-            //creates the prisms edges and lines
-            canvasCtx.moveTo(this.left, this.top);
-            canvasCtx.lineTo(this.left + 5, this.top + 5);
-            canvasCtx.lineTo(this.left + 25, this.top + 5);
-            canvasCtx.lineTo(this.left + 20, this.top);
-            canvasCtx.lineTo(this.left, this.top);
-            canvasCtx.lineTo(this.left, this.top + 20);
-            canvasCtx.lineTo(this.left + 5, this.top + 25);
-            canvasCtx.lineTo(this.left + 5, this.top + 5);
-            canvasCtx.moveTo(this.left + 25, this.top + 25);
-            canvasCtx.lineTo(this.left + 5, this.top + 25);
-            canvasCtx.moveTo(this.left + 25, this.top + 25);
-            canvasCtx.lineTo(this.left + 25, this.top + 5);
-            canvasCtx.stroke();
-
-        }
+        canvasCtx.beginPath();
+        canvasCtx.moveTo(this.left, this.top);
+        canvasCtx.lineTo(this.left - 25, this.top + 25);
+        canvasCtx.lineTo(this.left + 25, this.top + 25);
+        canvasCtx.lineTo(this.left, this.top);
+        canvasCtx.fill();
     }
-}//function Prism()
+}//function Triangle()
 
-//implementing the new prism's prototypal class
-Prism.prototype = new Shape();
+//implementing triangle's prototypal class
+Triangle.prototype = new Shape();
+
+function Pentagon(left, top, width, height, stylesMap) {
+
+    Shape.call(this, left, top, 50, 50, {
+        fillStyle: "blue",
+        stroke: stylesMap.stroke
+    });
+
+    this.renderShape = function(canvasCtx) {
+        canvasCtx.beginPath();
+        canvasCtx.moveTo(this.left, this.top);
+        canvasCtx.lineTo(this.left - 25, this.top - 25);
+        canvasCtx.lineTo(this.left - 25, this.top - 50);
+        canvasCtx.lineTo(this.left + 25, this.top - 50);
+        canvasCtx.lineTo(this.left + 25, this.top - 25);
+        canvasCtx.fill();
+    }
+}//function Pentagon()
+
+//implementing pentagon's prototypal class
+Pentagon.prototype = new Shape();
 
 //register all these shapes for user to play with
 registerClassicalShape('Circle', Circle);
 registerClassicalShape('Rectangle', Rectangle);
-registerClassicalShape('Prism', Prism);
+registerClassicalShape('Triangle', Triangle);
+registerClassicalShape('Pentagon', Pentagon);
